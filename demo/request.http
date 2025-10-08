@@ -1,0 +1,79 @@
+###
+
+POST http://localhost:8080/api/datasets
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name" : "dataset 1"
+}
+
+###
+
+GET http://localhost:8080/api/datasets
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/datasets/1
+Accept: application/json
+
+###
+
+PUT http://localhost:8080/api/datasets/2
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name" : "dataset 1 modificado"
+}
+
+###
+
+DELETE http://localhost:8080/api/datasets/2
+Accept: application/json
+
+###
+
+POST http://localhost:8080/api/datapoints
+Content-Type: application/json
+Accept: application/json
+
+{
+  "x": 1.0,
+  "y": 2.0,
+  "dataset": {
+    "id": 1
+  }
+}
+
+###
+
+GET http://localhost:8080/api/datapoints/dataset/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/datapoints/1
+Accept: application/json
+
+###
+
+PUT http://localhost:8080/api/datapoints/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "x": 2.0,
+  "y": 2.0,
+  "dataset": {
+    "id": 1
+  }
+}
+
+###
+
+DELETE http://localhost:8080/api/datapoints/1
+
+###
+DELETE http://localhost:8080/api/datapoints/dataset/1
