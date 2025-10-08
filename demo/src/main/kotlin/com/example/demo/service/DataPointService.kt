@@ -101,36 +101,22 @@ class DataPointService(
         }
     }
     
-    /**
-     * Recalcula la regresión lineal si existe una para el dataset dado.
-     * Actualiza automáticamente los valores de la regresión existente.
-     * @return La regresión actualizada o null si no existe o no se pudo calcular
-     */
     private fun recalculateRegressionIfExists(datasetId: Long): com.example.demo.model.Regresion? {
         return try {
-            // Verificar si existe una regresión para este dataset
             val existingRegression = regresionService.getByDatasetId(datasetId)
             
             if (existingRegression != null) {
-                // Verificar que haya suficientes puntos para recalcular
                 val dataPoints = dataPointRepository.findByDatasetId(datasetId)
                 if (dataPoints.size >= 2) {
-                    // El método create ahora actualiza automáticamente si ya existe
-                    val updated = regresionService.create(datasetId)
-                    println("✅ Regresión recalculada para dataset $datasetId")
-                    updated
+                    regresionService.create(datasetId)
                 } else {
-                    // Si hay menos de 2 puntos, eliminar la regresión
                     regresionService.deleteByDatasetId(datasetId)
-                    println("⚠️ Regresión eliminada: no hay suficientes puntos para dataset $datasetId")
                     null
                 }
             } else {
                 null
             }
         } catch (e: Exception) {
-            // Si hay algún error al recalcular, solo lo registramos pero no fallar la operación principal
-            println("⚠️ Error al recalcular regresión: ${e.message}")
             null
         }
     }

@@ -57,11 +57,8 @@ class RegresionService(
             existingRegression.m = m
             existingRegression.b = b
             existingRegression.r2 = r2
-            println(" Actualizando regresión existente para dataset $datasetId")
             existingRegression
         } else {
-            // Crear nueva regresión
-            println("✨ Creando nueva regresión para dataset $datasetId")
             Regresion(
                 dataset = dataset,
                 m = m,

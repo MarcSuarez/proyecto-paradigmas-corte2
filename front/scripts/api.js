@@ -1,7 +1,5 @@
-// Constantes
 const API_BASE_URL = 'http://localhost:8080';
 
-// Función auxiliar para manejar las respuestas de fetch
 async function handleResponse(response) {
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -10,14 +8,11 @@ async function handleResponse(response) {
     }
     return response.json();
 }
-
-// Funciones para interactuar con la API
 export async function getData(endpoint) {
     try {
         const response = await fetch(`${API_BASE_URL}${endpoint}`);
         return handleResponse(response);
     } catch (error) {
-        console.error('Error en getData:', error);
         throw error;
     }
 }
@@ -33,7 +28,6 @@ export async function postData(endpoint, data) {
         });
         return handleResponse(response);
     } catch (error) {
-        console.error('Error en postData:', error);
         throw error;
     }
 }
@@ -49,7 +43,6 @@ export async function putData(endpoint, data) {
         });
         return handleResponse(response);
     } catch (error) {
-        console.error('Error en putData:', error);
         throw error;
     }
 }
@@ -59,9 +52,7 @@ export async function deleteData(endpoint) {
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             method: 'DELETE',
         });
-        // En algunas APIs, DELETE puede no devolver contenido, así que manejamos el status
         if (response.status === 200) {
-            // Intentar parsear JSON si hay contenido
             const text = await response.text();
             return text ? JSON.parse(text) : { success: true };
         } else if (response.status === 204) {
@@ -70,7 +61,6 @@ export async function deleteData(endpoint) {
             throw new Error(`Error HTTP: ${response.status}`);
         }
     } catch (error) {
-        console.error('Error en deleteData:', error);
         throw error;
     }
 }

@@ -1,7 +1,6 @@
 import { getData, postData, putData, deleteData } from './api.js';
 
-// Constantes
-const ENDPOINT = '/api/datasets'; // Ajusta según tu endpoint real
+const ENDPOINT = '/api/datasets';
 
 // Elementos DOM
 const tableBody = document.getElementById('tableBody');
@@ -24,7 +23,6 @@ function setupEventListeners() {
     addButton.addEventListener('click', handleAdd);
 }
 
-// Funciones para manejo de datos
 async function loadData() {
     try {
         showLoading();
@@ -32,7 +30,6 @@ async function loadData() {
         renderTable();
         hideLoading();
     } catch (error) {
-        console.error('Error al cargar datos:', error);
         showError();
     }
 }
@@ -99,17 +96,14 @@ function handleAdd() {
         
         postData(ENDPOINT, newDataset)
             .then(() => {
-                loadData(); // Recargar la tabla después de añadir
+                loadData();
             })
             .catch(error => {
-                console.error('Error al crear el conjunto de datos:', error);
                 alert(`Error al crear el conjunto de datos: ${error.message}`);
             });
     }
 }
 
-// Nota: Para que las funciones handleEdit y handleDelete sean accesibles desde el onclick en el HTML,
-// las asignamos al objeto window. Otra opción sería usar event listeners en lugar de onclick.
 window.handleEdit = async function(id) {
     const item = data.find(item => item.id === id);
     if (item) {
@@ -122,9 +116,8 @@ window.handleEdit = async function(id) {
             
             try {
                 await putData(`${ENDPOINT}/${id}`, updatedItem);
-                loadData(); // Recargar la tabla después de editar
+                loadData();
             } catch (error) {
-                console.error('Error al actualizar el conjunto de datos:', error);
                 alert(`Error al actualizar: ${error.message}`);
             }
         }
@@ -139,7 +132,6 @@ window.handleDelete = async function(id) {
             data = data.filter(item => item.id !== id);
             renderTable();
         } catch (error) {
-            console.error('Error al eliminar:', error);
             alert(`Error al eliminar: ${error.message}`);
         }
     }

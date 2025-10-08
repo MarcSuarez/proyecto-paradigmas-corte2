@@ -15,7 +15,6 @@ export class DatasetManager {
             this.updateTitle();
             return dataset;
         } catch (error) {
-            console.error('Error al cargar dataset:', error);
             throw error;
         }
     }
