@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Dataset</title>
+    <link rel="stylesheet" href="styles/view.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <button id="backButton" class="btn btn-back">
+                    ← Volver
+                </button>
+                <h1 id="datasetTitle">Cargando...</h1>
+            </div>
+        </header>
+
+        <div class="content-grid">
+            <!-- Sección del gráfico -->
+            <div class="chart-section card">
+                <div class="card-header">
+                    <h2>Gráfico de Regresión Lineal</h2>
+                    <button id="calculateRegression" class="btn btn-primary">
+                        Calcular Regresión
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="regressionChart"></canvas>
+                </div>
+                <div id="regressionInfo" class="regression-info hidden">
+                    <h3>Ecuación de la Recta</h3>
+                    <p class="equation">y = <span id="slope">0</span>x + <span id="intercept">0</span></p>
+                    <p class="r-squared">R² = <span id="rSquared">0</span></p>
+                </div>
+            </div>
+
+            <!-- Sección de puntos -->
+            <div class="points-section card">
+                <div class="card-header">
+                    <h2>Puntos de Datos</h2>
+                    <button id="addPointButton" class="btn btn-primary">
+                        + Añadir Punto
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table id="pointsTable">
+                        <thead>
+                            <tr>
+                                <th>X</th>
+                                <th>Y</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pointsTableBody">
+                            <!-- Los puntos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noPointsMessage" class="no-data">
+                    No hay puntos de datos. Añade algunos para visualizar la regresión.
+                </div>
+            </div>
+        </div>
+
+        <div id="loadingMessage" class="loading">Cargando datos...</div>
+        <div id="errorMessage" class="error hidden">Error al cargar los datos</div>
+    </div>
+
+    <!-- Modal para añadir/editar punto -->
+    <div id="pointModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Añadir Punto</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="pointX">Valor X:</label>
+                    <input type="number" id="pointX" step="any" placeholder="Ingrese el valor de X" required>
+                </div>
+                <div class="form-group">
+                    <label for="pointY">Valor Y:</label>
+                    <input type="number" id="pointY" step="any" placeholder="Ingrese el valor de Y" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelModal">Cancelar</button>
+                <button class="btn btn-primary" id="savePoint">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="scripts/view.js"></script>
+</body>
+</html>

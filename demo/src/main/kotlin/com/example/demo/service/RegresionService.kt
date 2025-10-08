@@ -20,10 +20,8 @@ class RegresionService(
         }
 
         // 2️ Verificar si ya existe una regresión para este dataset
-        if (regresionRepository.findAll().any { it.dataset.id == datasetId }) {
-            throw IllegalArgumentException("Ya existe una regresión para el dataset $datasetId. Elimínela primero si desea recalcular.")
-        }
-
+        val existingRegression = regresionRepository.findAll().find { it.dataset.id == datasetId }
+        
         // 3️ Obtener los data points del dataset
         val dataPoints = dataPointRepository.findByDatasetId(datasetId)
         if (dataPoints.isEmpty()) {
@@ -45,7 +43,7 @@ class RegresionService(
             throw IllegalArgumentException("Los puntos están alineados verticalmente. No se puede calcular la pendiente.")
         }
 
-        // 5️⃣ Calcular m, b y R²
+        // 5️ Calcular m, b y R²
         val m = (n * sumXY - sumX * sumY) / denominator
         val b = (sumY - m * sumX) / n
         val meanY = sumY / n
@@ -53,13 +51,24 @@ class RegresionService(
         val ssTot = dataPoints.sumOf { (it.y - meanY).let { d -> d * d } }
         val r2 = if (ssTot == 0.0) 1.0 else 1.0 - (ssRes / ssTot)
 
-        // 6️⃣ Crear y guardar la regresión
-        val regresion = Regresion(
-            dataset = dataset,
-            m = m,
-            b = b,
-            r2 = r2
-        )
+        // 6️ Crear o actualizar la regresión
+        val regresion = if (existingRegression != null) {
+            // Actualizar regresión existente
+            existingRegression.m = m
+            existingRegression.b = b
+            existingRegression.r2 = r2
+            println(" Actualizando regresión existente para dataset $datasetId")
+            existingRegression
+        } else {
+            // Crear nueva regresión
+            println("✨ Creando nueva regresión para dataset $datasetId")
+            Regresion(
+                dataset = dataset,
+                m = m,
+                b = b,
+                r2 = r2
+            )
+        }
 
         return regresionRepository.save(regresion)
     }

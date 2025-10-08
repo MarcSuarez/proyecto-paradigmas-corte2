@@ -40,20 +40,6 @@ class DataPointController(private val dataPointService: DataPointService) {
         }
     }
 
-    @GetMapping("/dataset/{datasetId}")
-    fun getByDatasetId(@PathVariable datasetId: Long): ResponseEntity<Any> {
-        return try {
-            val dataPoints = dataPointService.getByDatasetId(datasetId)
-            return if (dataPoints.isEmpty()) {
-                ResponseEntity.status(HttpStatus.OK).body(mapOf("message" to "No hay data points para el dataset $datasetId"))
-            } else {
-                ResponseEntity.ok(dataPoints)
-            }
-        } catch (e: NoSuchElementException) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body(mapOf("error" to e.message))
-        }
-    }
-
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody dataPoint: DataPoint): ResponseEntity<Any> {
         return try {
@@ -69,8 +55,12 @@ class DataPointController(private val dataPointService: DataPointService) {
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long): ResponseEntity<Any> {
         return try {
-            dataPointService.delete(id)
-            ResponseEntity.ok(mapOf("message" to "DataPoint eliminado correctamente"))
+            val response = dataPointService.delete(id)
+            if (response != null) {
+                ResponseEntity.ok(response)
+            } else {
+                ResponseEntity.ok(mapOf("message" to "DataPoint eliminado correctamente"))
+            }
         } catch (e: NoSuchElementException) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body(mapOf("error" to e.message))
         }

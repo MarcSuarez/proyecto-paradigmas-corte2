@@ -1,5 +1,6 @@
 package com.example.demo.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jakarta.persistence.*
 
 @Entity
@@ -11,6 +12,7 @@ data class DataPoint(
 
     @ManyToOne
     @JoinColumn(name = "dataset_id", nullable = false)
+    @JsonIgnoreProperties("regression")
     val dataset: Dataset,
 
     @Column(nullable = false)
