@@ -28,14 +28,11 @@ function setupEventListeners() {
 async function loadData() {
     try {
         showLoading();
-        console.log('🔍 Intentando cargar datos desde:', ENDPOINT);
         data = await getData(ENDPOINT);
-        console.log('✅ Datos recibidos:', data);
         renderTable();
         hideLoading();
     } catch (error) {
-        console.error('❌ Error al cargar datos:', error);
-        console.error('❌ Detalles del error:', error.message);
+        console.error('Error al cargar datos:', error);
         showError();
     }
 }

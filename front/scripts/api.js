@@ -1,5 +1,5 @@
 // Constantes
-const API_BASE_URL = 'http://localhost:8080'; // Ajusta el puerto según tu configuración del backend
+const API_BASE_URL = 'http://localhost:8080';
 
 // Función auxiliar para manejar las respuestas de fetch
 async function handleResponse(response) {
@@ -14,13 +14,10 @@ async function handleResponse(response) {
 // Funciones para interactuar con la API
 export async function getData(endpoint) {
     try {
-        const url = `${API_BASE_URL}${endpoint}`;
-        console.log('🌐 Haciendo GET a:', url);
-        const response = await fetch(url);
-        console.log('📡 Respuesta recibida:', response.status, response.statusText);
+        const response = await fetch(`${API_BASE_URL}${endpoint}`);
         return handleResponse(response);
     } catch (error) {
-        console.error('❌ Error en getData:', error);
+        console.error('Error en getData:', error);
         throw error;
     }
 }
