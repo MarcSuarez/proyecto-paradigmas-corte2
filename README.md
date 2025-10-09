@@ -101,7 +101,7 @@ cd proyecto_final
 
 El backend de Spring Boot leerá automáticamente el archivo .env y configurará la conexión a la base de datos. No es necesario modificar manualmente el archivo application.properties.
 
-### Opción 1: Usando Gradle (Recomendado)
+### Abrir servidor backend
 
 1. **Navegar al directorio del backend**:
    ```bash
