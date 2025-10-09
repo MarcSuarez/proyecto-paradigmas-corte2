@@ -47,7 +47,7 @@ Aplicación web full-stack para gestión de datasets y cálculo de regresión li
 ### Paso 1: Clonar el Repositorio
 
 ```bash
-git clone <url-del-repositorio>
+git clone https://github.com/MarcSuarez/proyecto-paradigmas-corte2.git
 cd proyecto_final
 ```
 
@@ -57,7 +57,7 @@ cd proyecto_final
    ```bash
    # En Linux/Mac
    sudo systemctl start mysql
-   
+
    # En Windows (como servicio)
    net start MySQL80
    ```
@@ -70,32 +70,36 @@ cd proyecto_final
    Dentro de MySQL, ejecutar:
    ```sql
    CREATE DATABASE regresion_db;
-   CREATE USER 'Marc'@'localhost' IDENTIFIED BY '1423';
-   GRANT ALL PRIVILEGES ON regresion_db.* TO 'Marc'@'localhost';
-   FLUSH PRIVILEGES;
    EXIT;
    ```
 
-3. **Configurar credenciales** (si son diferentes):
-   
-   Editar el archivo `demo/src/main/resources/application.properties`:
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/regresion_db?allowPublicKeyRetrieval=true&useSSL=false
-   spring.datasource.username=TU_USUARIO
-   spring.datasource.password=TU_CONTRASEÑA
+3. **Configurar variables de entorno:**
+   Navegar al directorio demo del proyecto:
+   ```bash
+   cd demo
    ```
 
-### Paso 3: Verificar Dependencias del Backend
+   Crear el archivo .env en el directorio demo:
+   ```bash
+   # En Linux/Mac
+   touch .env
 
-El proyecto usa Gradle, que descargará automáticamente todas las dependencias necesarias:
-- Spring Boot 3.x
-- Spring Data JPA
-- MySQL Connector
-- Kotlin
+   # En Windows
+   type nul > .env
+   ```
+   Editar el archivo .env y agregar las siguientes variables con tus credenciales:
 
-No es necesario instalar nada adicional.
+   ```bash
+   DB_USER=Tu Data
+   DB_PASSWORD=Tu Data
+   DB_HOST=Tu Data
+   DB_PORT=Tu Data
+   DB_NAME=Tu Data
+   ```
 
-## Ejecución del Proyecto
+4. **Configuración automática del backend:**
+
+El backend de Spring Boot leerá automáticamente el archivo .env y configurará la conexión a la base de datos. No es necesario modificar manualmente el archivo application.properties.
 
 ### Opción 1: Usando Gradle (Recomendado)
 
@@ -258,7 +262,7 @@ proyecto_final/
 
 ## Autor
 
-Proyecto desarrollado como parte del curso de Programación Paralela.
+Proyecto desarrollado como parte del curso de Paradigmas de programacion
 
 ## Licencia
 
