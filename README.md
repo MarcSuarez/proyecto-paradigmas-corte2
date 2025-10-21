@@ -127,7 +127,7 @@ El backend de Spring Boot leerá automáticamente el archivo .env y configurará
 2. Esperar a que Gradle sincronice las dependencias
 3. Ejecutar la clase principal: `DemoApplication.kt`
 
-### Abrir el Frontend
+### Abrir el server del Frontend
 
 1. **Navegar al directorio del frontend**:
    ```bash

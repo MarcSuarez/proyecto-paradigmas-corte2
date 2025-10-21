@@ -1,6 +1,6 @@
 package com.example.demo.model
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 
 @Entity
@@ -12,7 +12,7 @@ data class DataPoint(
 
     @ManyToOne
     @JoinColumn(name = "dataset_id", nullable = false)
-    @JsonIgnoreProperties("regression")
+    @JsonBackReference("dataset-datapoints")
     val dataset: Dataset,
 
     @Column(nullable = false)
@@ -24,4 +24,3 @@ data class DataPoint(
     // Constructor para deserialización JSON con solo ID del dataset
     constructor(datasetId: Long, x: Double, y: Double) : this(0, Dataset(datasetId), x, y)
 }
-
