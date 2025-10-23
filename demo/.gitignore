@@ -1,43 +1,84 @@
-HELP.md
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+# ==========================
+# 🔐 SISTEMAS OPERATIVOS
+# ==========================
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+# --- Windows ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*:Zone.Identifier
+*.identifier
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# --- Linux ---
+*~
+.directory
+.Trash-*
+
+# ==========================
+# ⚙️ ENTORNO DE DESARROLLO
+# ==========================
+
+# --- IntelliJ IDEA / Android Studio ---
+.idea/
 *.iml
+*.iws
 *.ipr
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# --- Eclipse ---
+.classpath
+.project
+.settings/
+bin/
 
-### VS Code ###
+# --- VS Code ---
 .vscode/
 
-### Kotlin ###
-.kotlin
+# ==========================
+# 🧱 GRADLE / COMPILACIÓN
+# ==========================
 
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ==========================
+# ☕️ JAVA / KOTLIN
+# ==========================
+
+*.class
+*.kt.swp
+*.log
+*.gz
+*.tmp
+
+# ==========================
+# 🌱 SPRING BOOT
+# ==========================
+
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# ==========================
+# 🔑 VARIABLES DE ENTORNO
+# ==========================
 
 .env
+.env.local
+.env.*.local

@@ -48,7 +48,7 @@ Aplicación web full-stack para gestión de datasets y cálculo de regresión li
 
 ```bash
 git clone https://github.com/MarcSuarez/proyecto-paradigmas-corte2.git
-cd proyecto_final
+cd proyecto-paradigmas-corte2.git
 ```
 
 ### Paso 2: Configurar la Base de Datos
@@ -69,7 +69,7 @@ cd proyecto_final
    
    Dentro de MySQL, ejecutar:
    ```sql
-   CREATE DATABASE regresion_db;
+   CREATE DATABASE (el nombre de la db que quieras);
    EXIT;
    ```
 
